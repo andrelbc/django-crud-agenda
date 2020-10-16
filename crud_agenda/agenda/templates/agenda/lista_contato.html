@@ -1,0 +1,43 @@
+{% extends "agenda/base.html" %}
+
+{% block content %}
+    <div class="table-responsive-sm">
+        <div class="my-3 float-right">
+            <form action="" method="get">
+                {{ myFilter.form }}
+                <button class="btn btn-success" type="submit">Buscar</button>
+            </form>
+        </div>
+        <table class="table table-hover">
+            <thead>
+            <tr class="text-secondary">
+                <th>Nome Completo</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for contato in lista_contatos %}
+                <tr>
+                    <td class="align-middle">{{ contato.nome }}</td>
+                    <td class="align-middle">{{ contato.email }}</td>
+                    <td class="align-middle">{{ contato.phone_number }}</td>
+                    <td>
+                        <a href="{% url 'contato_update' contato.id %}" class="btn text-secondary">
+                            <i class="fas fa-user-edit"></i>
+                        </a>
+                        <form class="float-right" action="{% url 'delete_contato' contato.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn text-danger">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock content %}
