@@ -30,10 +30,10 @@ def form_Contatos(request, id=0):  # tratar insert e update
             form = FormContato(request.POST, instance=contato)
         if form.is_valid():
             form.save()
-        return redirect('/agenda/lista')
+        return redirect('/lista')
 
 
 def deletar_Contatos(request, id):  # tratar o delete
     contato = Contato.objects.get(pk=id)
     contato.delete()
-    return redirect('/agenda/lista')
+    return redirect('/lista')
